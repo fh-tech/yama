@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 public class Actor {
 
+    private Long id;
+    private Gender gender;
     private String firstName;
     private String lastName;
     private LocalDate birthDay;
