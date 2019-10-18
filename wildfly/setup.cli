@@ -1,0 +1,36 @@
+embed-server -c=standalone.xml
+
+if (outcome != success) of /core-service=module-loading:list-resource-loader-paths(module=com.mysql)
+	module add \
+		--name=com.mysql \
+		--resources=mysql-connector-java-8.0.17.jar \
+		--dependencies=javax.api,javax.transaction.api
+end-if
+
+if (outcome != success) of /subsystem=datasources/jdbc-driver=mysql:read-resource()
+	/subsystem=datasources/jdbc-driver=mysql:add( \
+		driver-name=mysql, \
+		driver-module-name=com.mysql, \
+		driver-class-name=com.mysql.cj.jdbc.Driver, \
+		driver-xa-datasource-class-name=com.mysql.cj.jdbc.MysqlXADataSource \
+	)
+end-if
+
+if (outcome == success) of /subsystem=datasources/data-source=YamaDS:read-resource()
+	data-source remove --name=YamaDS
+end-if
+
+data-source add \
+	--name=YamaDS \
+	--jndi-name=java:jboss/datasources/YamaDS \
+	--driver-name=mysql \
+	--connection-url=jdbc:mysql://localhost:3306/yama_db?serverTimezone=Europe/Vienna \
+	--user-name=root \
+	--password=admin \
+	--min-pool-size=5 \
+	--max-pool-size=5 \
+	--pool-prefill=true
+
+stop-embedded-server
+
+exit
