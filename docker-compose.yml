@@ -10,15 +10,3 @@ services:
       MYSQL_USER: 'root'
       MYSQL_PASSWORD: 'admin'
       MYSQL_ROOT_PASSWORD: 'admin'
-  wildfly:
-    build:
-      context: wildfly
-      #args:
-      #  UID: 1000
-      #  GUID: 1000
-    restart: always
-    volumes:
-      - ./deploy/:/opt/jboss/wildfly/standalone/deployments/
-    ports:
-      - "8080:8080"
-      - "9990:9990"

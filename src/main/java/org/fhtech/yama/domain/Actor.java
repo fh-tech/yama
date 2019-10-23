@@ -1,4 +1,4 @@
-package org.fhtech.yama;
+package org.fhtech.yama.domain;
 
 import lombok.Data;
 

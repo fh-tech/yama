@@ -1,7 +1,8 @@
-package org.fhtech.yama;
+package org.fhtech.yama.domain;
 
 import lombok.Data;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 
