@@ -1,0 +1,64 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://fhtech.org/yama/movies"
+           targetNamespace="http://fhtech.org/yama/movies"
+           elementFormDefault="qualified">
+
+    <xs:element name="movies">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="movie" type="tns:movie"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="movie">
+        <xs:sequence>
+            <xs:element name="studio" type="tns:studio"/>
+            <xs:element name="actors" type="tns:actors"/>
+        </xs:sequence>
+        <xs:attribute type="xs:string" name="title"/>
+        <xs:attribute type="xs:string" name="description"/>
+        <xs:attribute type="tns:genre" name="genre"/>
+        <xs:attribute type="xs:byte" name="length"/>
+        <xs:attribute type="xs:short" name="releaseyear"/>
+    </xs:complexType>
+
+    <xs:complexType name="studio">
+        <xs:attribute type="xs:string" name="name"/>
+        <xs:attribute type="xs:string" name="countrycode"/>
+        <xs:attribute type="xs:string" name="postcode"/>
+    </xs:complexType>
+
+    <xs:complexType name="actor">
+        <xs:attribute type="xs:string" name="firstname"/>
+        <xs:attribute type="xs:string" name="lastname"/>
+        <xs:attribute type="tns:sex" name="sex"/>
+        <xs:attribute type="xs:date" name="birthdate"/>
+    </xs:complexType>
+
+    <xs:complexType name="actors">
+        <xs:sequence>
+            <xs:element name="actor" type="tns:actor" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="genre">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ACTION"/>
+            <xs:enumeration value="ANIMATION"/>
+            <xs:enumeration value="COMEDY"/>
+            <xs:enumeration value="DRAMA"/>
+            <xs:enumeration value="HORROR"/>
+            <xs:enumeration value="SCIENCE_FICTION"/>
+            <xs:enumeration value="THRILLER"/>
+            <xs:enumeration value="WESTERN"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="sex">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="MALE"/>
+            <xs:enumeration value="FEMALE"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
