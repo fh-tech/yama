@@ -1,13 +1,17 @@
 package org.fhtech.yama.domain;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Actor {
     @Id
@@ -29,5 +33,6 @@ public class Actor {
         joinColumns = {@JoinColumn(name = "actor_id")},
         inverseJoinColumns = {@JoinColumn(name= "movie_id")}
     )
+    @JsonIgnoreProperties("actors")
     private List<Movie> movies;
 }

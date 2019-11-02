@@ -1,12 +1,17 @@
 package org.fhtech.yama.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Studio {
     @Id
@@ -20,5 +25,6 @@ public class Studio {
     private String countryCode;
 
     @OneToMany(mappedBy = "studio")
+    @JsonIgnoreProperties("studio")
     private List<Movie> movies;
 }

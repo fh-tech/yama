@@ -1,14 +1,18 @@
 package org.fhtech.yama.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
-
 import javax.persistence.*;
-import java.time.Duration;
-import java.time.LocalDate;
 import java.util.List;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Movie {
     @Id
@@ -22,7 +26,7 @@ public class Movie {
     // always in minutes
     private int duration;
 
-    private LocalDate releaseYear;
+    private int releaseYear;
 
     @ManyToMany()
     @JoinTable(
@@ -30,9 +34,13 @@ public class Movie {
             joinColumns = {@JoinColumn(name= "movie_id")},
             inverseJoinColumns = {@JoinColumn(name = "actor_id")}
     )
+    // to avoid circular reference
+    @JsonIgnoreProperties("movies")
     private List<Actor> actors;
 
     @ManyToOne()
+    // to avoid circular reference
+    @JsonIgnoreProperties("movies")
     private Studio studio;
 
     @Enumerated(EnumType.STRING)
