@@ -1,12 +1,10 @@
 package org.fhtech.yama.domain;
 
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -19,14 +17,14 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String title;
 
     private String description;
 
     // always in minutes
-    private int duration;
+    private short length;
 
-    private int releaseYear;
+    private short releaseYear;
 
     @ManyToMany()
     @JoinTable(

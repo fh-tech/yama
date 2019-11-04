@@ -8,8 +8,8 @@ import java.util.List;
 public class UpdateMovie {
     private String name;
     private String description;
-    private int duration;
-    private int releaseYear;
+    private short duration;
+    private short releaseYear;
     private List<Long> actors;
     private long studioId;
     private Genre genre;

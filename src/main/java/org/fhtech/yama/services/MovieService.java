@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class MovieService {
@@ -58,9 +57,9 @@ public class MovieService {
 
     public Movie update(long id, UpdateMovie updateMovie) {
         var movie = findById(id);
-        movie.setName(updateMovie.getName());
+        movie.setTitle(updateMovie.getName());
         movie.setDescription(updateMovie.getDescription());
-        movie.setDuration(updateMovie.getDuration());
+        movie.setLength(updateMovie.getDuration());
         movie.setReleaseYear(updateMovie.getReleaseYear());
         movie.setActors((List<Actor>) getAllActorsForIds(updateMovie.getActors()));
         movie.setStudio(findStudioById(id));
@@ -68,6 +67,10 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
+    public Iterable<Movie> findMoviesByTitleContains(String searchString) {
+//        return movieRepository.findMoviesByTitleContains(searchString);
+        return movieRepository.findAll();
+    }
 
     private Iterable<Actor> getAllActorsForIds(List<Long> actorIds) {
         return actorRepository.findAllById(actorIds);

@@ -24,7 +24,7 @@ function buildStudioElement(studio) {
                             </button>
                         </h2>
                     </div>
-                    <div id="collapse${studio.id}" class="collapse show" aria-labelledby="heading${studio.id}" data-parent="#studioAccordion">
+                    <div id="collapse${studio.id}" class="collapse" aria-labelledby="heading${studio.id}" data-parent="#studioAccordion">
                         <div class="card-body">
                             <div class="container-fluid">
                                 <div class="row">

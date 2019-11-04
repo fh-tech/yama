@@ -5,7 +5,7 @@ import java.util.List;
 
 @Value
 public class NewActor {
-    private Gender gender;
+    private Sex sex;
     private String firstName;
     private String lastName;
     // String representation to send "YYYY-MM-DD"

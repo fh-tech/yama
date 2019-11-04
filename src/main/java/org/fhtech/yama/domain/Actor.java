@@ -3,7 +3,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Value;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,7 +18,7 @@ public class Actor {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private Sex sex;
 
     private String firstName;
 

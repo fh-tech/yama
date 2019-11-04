@@ -1,5 +1,5 @@
 package org.fhtech.yama.domain;
 
-public enum Gender {
+public enum Sex {
     MALE, FEMALE
 }

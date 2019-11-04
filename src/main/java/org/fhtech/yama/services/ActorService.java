@@ -32,7 +32,7 @@ public class ActorService {
     public Actor save(NewActor newActor) {
         Actor actor = new Actor(
                 null,
-                newActor.getGender(),
+                newActor.getSex(),
                 newActor.getFirstName(),
                 newActor.getLastName(),
                 newActor.getBirthDay(),
@@ -57,7 +57,7 @@ public class ActorService {
         actor.setBirthDay(updateActor.getBirthDay());
         actor.setFirstName(updateActor.getFirstName());
         actor.setLastName(updateActor.getLastName());
-        actor.setGender(updateActor.getGender());
+        actor.setSex(updateActor.getSex());
         actor.setMovies((List<Movie>) getAllMoviesForIds(updateActor.getMovieIds()));
         return actorRepository.save(actor);
     }
