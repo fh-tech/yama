@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:gs="http://fhtech.org/yama/movies">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <gs:searchMovieRequest>
+            <gs:searchString></gs:searchString>
+        </gs:searchMovieRequest>
+    </soapenv:Body>
+</soapenv:Envelope>
