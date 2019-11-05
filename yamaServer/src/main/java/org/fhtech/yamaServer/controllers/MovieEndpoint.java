@@ -3,6 +3,7 @@ package org.fhtech.yamaServer.controllers;
 
 import org.fhtech.yama.movies.*;
 import org.fhtech.yamaServer.services.MovieService;
+import org.fhtech.yamaServer.utility.MovieConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -28,19 +29,22 @@ public class MovieEndpoint {
 
         SearchMovieResponse response = new SearchMovieResponse();
         var domainMovies = movieService.findMoviesByTitleContains(request.getSearchString());
-//        response.getMovies()
-//                .addAll(MovieConverter.convertToXMLMovies(domainMovies));
+        response.getMovies()
+                .addAll(MovieConverter.convertToXMLMovies(domainMovies));
         return response;
     }
 
 
 //    //TODO: exercise says only import if studio and actors already exist (why are they listed in the xml then and not just ids?) should i search if they exist or import them myself beforehand
-//    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "importMovieRequest")
-//    @ResponsePayload
-//    public ImportMovieResponse importMovies(@RequestPayload ImportMovieRequest request) {
-//        ImportMovieResponse response = new ImportMovieResponse();
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "importMovieRequest")
+    @ResponsePayload
+    public ImportMovieResponse importMovies(@RequestPayload ImportMovieRequest request) {
+        ImportMovieResponse response = new ImportMovieResponse();
 //        movieService.saveAll(request.getMovies());
-//    }
+
+        // TODO: implement
+        return response;
+    }
 
 
 }
