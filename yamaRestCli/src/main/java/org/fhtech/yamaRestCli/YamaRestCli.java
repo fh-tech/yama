@@ -1,3 +1,5 @@
+package org.fhtech.yamaRestCli;
+
 import org.apache.commons.cli.*;
 
 import java.io.IOException;

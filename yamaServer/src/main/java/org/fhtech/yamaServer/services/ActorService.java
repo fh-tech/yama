@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -45,6 +47,10 @@ public class ActorService {
         return actorRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Actor not found"));
+    }
+
+    public Iterable<Actor> findAllByFirstNameAndLastNameAndBirthDay(String firstName, String lastName, LocalDate bDay) {
+        return actorRepository.findAllByFirstNameAndLastNameAndBirthDay(firstName, lastName, bDay);
     }
 
     public void deleteById(long id) {

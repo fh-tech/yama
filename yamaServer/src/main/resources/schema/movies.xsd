@@ -36,7 +36,6 @@
         </xs:complexType>
     </xs:element>
 
-
     <xs:simpleType name="genre">
         <xs:restriction base="xs:string">
             <xs:enumeration value="ACTION"/>

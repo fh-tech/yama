@@ -10,9 +10,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Component
 public class MovieService {
+
+    private static final Logger LOGGER = Logger.getLogger(MovieService.class.getName());
 
     private MovieRepository movieRepository;
     private StudioRepository studioRepository;
@@ -50,6 +53,7 @@ public class MovieService {
     }
 
     public Movie findById(long id) {
+        LOGGER.info("findById() >> id=" + id);
         return movieRepository
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found"));
