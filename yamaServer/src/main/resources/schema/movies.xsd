@@ -87,11 +87,14 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:complexType name="movies">
-        <xs:sequence>
-            <xs:element name="movie" type="tns:movie" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
+    <xs:element name="movies">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="movie" type="tns:movie" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 
 
 </xs:schema>

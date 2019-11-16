@@ -47,7 +47,7 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
-//    @Transactional makes it atomic so if one fails rolls back all (save all is already atomic!)
+    //    @Transactional makes it atomic so if one fails rolls back all (save all is already atomic!)
     public Iterable<Movie> saveAll(Iterable<Movie> movies) {
         return movieRepository.saveAll(movies);
     }
@@ -60,7 +60,7 @@ public class MovieService {
     }
 
     public void deleteById(long id) {
-        if(!movieRepository.existsById(id)) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found");
+        if (!movieRepository.existsById(id)) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Movie not found");
         movieRepository.deleteById(id);
     }
 
@@ -76,8 +76,33 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
+    public void importMovies(List<Movie> movies) {
+        movies.forEach(this::importMovie);
+    }
+
+    public void importMovie(Movie movie) {
+        var studio = movie.getStudio();
+        var studios = (List<Studio>) studioRepository.findAllByNameAndCountryCodeAndPostCode(
+                studio.getName(),
+                studio.getCountryCode(),
+                studio.getPostCode());
+        if (studios.size() < 1) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Studio not found");
+        if (studios.size() > 1)
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Studio exists more than once!");
+
+        movie.getActors().forEach(actor -> {
+            var actors = (List<Actor>) actorRepository.findAllByFirstNameAndLastNameAndBirthDay(
+                    actor.getFirstName(),
+                    actor.getLastName(),
+                    actor.getBirthDay()
+            );
+            if (actors.size() < 1) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Actor not found");
+            if (actors.size() > 1) throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Actor exists more than once!");
+        });
+        movieRepository.save(movie);
+    }
+
     public Iterable<Movie> findMoviesByTitleContains(String searchString) {
-//        return movieRepository.findMoviesByTitleContains(searchString);
         return movieRepository.findAll();
     }
 
@@ -90,7 +115,6 @@ public class MovieService {
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Studio not found"));
     }
-
 
 
 }
