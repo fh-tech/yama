@@ -1,0 +1,6 @@
+@XmlSchema(
+        namespace="http://fhtech.org/yama/movies",
+        elementFormDefault=XmlNsForm.QUALIFIED)
+package org.fhtech.yama.movies;
+
+import javax.xml.bind.annotation.*;

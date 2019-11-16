@@ -1,10 +1,7 @@
 package org.fhtech.yamaServer.utility;
 
 
-import org.fhtech.yama.movies.Actor;
-import org.fhtech.yama.movies.Genre;
-import org.fhtech.yama.movies.Sex;
-import org.fhtech.yama.movies.Studio;
+import org.fhtech.yama.movies.*;
 import org.fhtech.yamaServer.domain.Movie;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -63,7 +60,9 @@ public class MovieConverter {
             xmlActor.setLastname(domainActor.getLastName());
             xmlActors.add(xmlActor);
         });
-        xmlMovie.getActors().addAll(xmlActors);
+        var actors = new Actors();
+        actors.getActor().addAll(xmlActors);
+        xmlMovie.setActors(actors);
         xmlMovie.setDescription(movie.getDescription());
         xmlMovie.setLength(movie.getLength());
         xmlMovie.setReleaseyear(movie.getReleaseYear());

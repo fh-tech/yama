@@ -72,7 +72,7 @@
     <xs:complexType name="movie">
         <xs:sequence>
             <xs:element name="studio" type="tns:studio"/>
-            <xs:element name="actors" type="tns:actor" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="actors" type="tns:actors"/>
         </xs:sequence>
         <xs:attribute type="xs:string" name="title"/>
         <xs:attribute type="xs:string" name="description"/>
@@ -80,5 +80,18 @@
         <xs:attribute type="xs:short" name="length"/>
         <xs:attribute type="xs:short" name="releaseyear"/>
     </xs:complexType>
+
+    <xs:complexType name="actors">
+        <xs:sequence>
+            <xs:element name="actor" type="tns:actor" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="movies">
+        <xs:sequence>
+            <xs:element name="movie" type="tns:movie" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
 
 </xs:schema>
