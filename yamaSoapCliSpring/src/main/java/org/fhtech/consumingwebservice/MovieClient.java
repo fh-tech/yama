@@ -5,12 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
-import org.springframework.xml.transform.StringSource;
-import javax.xml.bind.JAXBElement;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import javax.xml.bind.JAXBContext;
+import javax.xml.transform.stream.StreamSource;
+import java.io.File;
 
 
 public class MovieClient extends WebServiceGatewaySupport {
@@ -29,11 +26,15 @@ public class MovieClient extends WebServiceGatewaySupport {
                                 "http://localhost:8080/ws/movies/searchMovieRequest"));
     }
 
-    public ImportMovieResponse importMovies(String filePath) throws IOException {
+    public ImportMovieResponse importMovies(String filePath) throws Exception {
+
+        var jaxbContext = JAXBContext.newInstance(Movies.class);
+        var unmarshaller = jaxbContext.createUnmarshaller();
+        var source = new StreamSource(new File(filePath));
+        var jaxElement = unmarshaller.unmarshal(source, Movies.class);
+
         var request = new ImportMovieRequest();
-        var xmlString = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
-        var movies = (JAXBElement<Movies>) this.getUnmarshaller().unmarshal(new StringSource(xmlString));
-        request.getMovies().addAll(movies.getValue().getMovie());
+        request.getMovies().addAll(jaxElement.getValue().getMovie());
         return (ImportMovieResponse) getWebServiceTemplate()
                 .marshalSendAndReceive("http://localhost:8080/ws/movies", request,
                         new SoapActionCallback(
