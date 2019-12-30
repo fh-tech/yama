@@ -70,11 +70,6 @@
                 <configuration>
                     <schemaLanguage>WSDL</schemaLanguage>
                     <generatePackage>org.fhtech.consumingwebservice.wsdl</generatePackage>
-                    <schemas>
-                        <schema>
-                            <url>http://localhost:8080/ws/movies.wsdl</url>
-                        </schema>
-                    </schemas>
                 </configuration>
             </plugin>
             <!-- end::wsdl[] -->

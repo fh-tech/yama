@@ -12,7 +12,7 @@ localhost:8080
 
 ### REST Interface
 #### Swagger 
-http://localhost:8080/swagger-ui.html#/
+http://localhost:8080/swagger-ui.html
 
 ### SOAP Interface
 http://localhost:8080/ws/movies.wsdl
