@@ -34,6 +34,7 @@ public class MovieClient extends WebServiceGatewaySupport {
         var jaxElement = unmarshaller.unmarshal(source, Movies.class);
 
         var request = new ImportMovieRequest();
+        var movies = jaxElement.getValue();
         request.getMovies().addAll(jaxElement.getValue().getMovie());
         return (ImportMovieResponse) getWebServiceTemplate()
                 .marshalSendAndReceive("http://localhost:8080/ws/movies", request,
