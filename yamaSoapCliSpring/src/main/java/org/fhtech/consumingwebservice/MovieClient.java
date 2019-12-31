@@ -1,13 +1,25 @@
 package org.fhtech.consumingwebservice;
 
+
 import org.fhtech.consumingwebservice.wsdl.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
+
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.stream.StreamSource;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 
 public class MovieClient extends WebServiceGatewaySupport {
@@ -28,6 +40,7 @@ public class MovieClient extends WebServiceGatewaySupport {
 
     public ImportMovieResponse importMovies(String filePath) throws Exception {
 
+
         var jaxbContext = JAXBContext.newInstance(Movies.class);
         var unmarshaller = jaxbContext.createUnmarshaller();
         var source = new StreamSource(new File(filePath));
@@ -36,6 +49,7 @@ public class MovieClient extends WebServiceGatewaySupport {
         var request = new ImportMovieRequest();
         var movies = jaxElement.getValue();
         request.getMovies().addAll(jaxElement.getValue().getMovie());
+
         return (ImportMovieResponse) getWebServiceTemplate()
                 .marshalSendAndReceive("http://localhost:8080/ws/movies", request,
                         new SoapActionCallback(

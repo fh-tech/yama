@@ -6,6 +6,7 @@ import org.fhtech.yama.movies.*;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,14 +42,12 @@ public class YamaSoapCli {
 
     private static List<Movie> loadMovies(String filePath) throws JAXBException {
 
-            File file = new File(filePath);
-            JAXBContext jaxbContext = JAXBContext.newInstance(Movies.class);
-
-            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            Movies movies = (Movies) jaxbUnmarshaller.unmarshal(file);
-
-//            System.out.println(importMovieRequest.getMovies());
-            return new ArrayList<>();
+        var jaxbContext = JAXBContext.newInstance(Movies.class);
+        var unmarshaller = jaxbContext.createUnmarshaller();
+        var source = new StreamSource(new File(filePath));
+        var jaxElement = unmarshaller.unmarshal(source, Movies.class);
+        var movies = jaxElement.getValue().getMovie();
+        return movies;
     }
 
 }
