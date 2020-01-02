@@ -70,6 +70,8 @@ public class ConsumingRestApplication {
                 new HelpFormatter().printHelp("utility-name", options);
                 System.exit(1);
             }
+            // just to let it finish for now
+            System.exit(0);
         };
     }
 

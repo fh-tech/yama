@@ -44,6 +44,8 @@ public class MovieConverter {
         domainStudio.setName(xmlStudio.getName());
         domainStudio.setPostCode(xmlStudio.getPostcode());
         domainStudio.setMovies(new ArrayList<>());
+        domainMovie.setStudio(domainStudio);
+
         return domainMovie;
     }
 

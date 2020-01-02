@@ -5,10 +5,13 @@ import org.fhtech.yama.movies.*;
 import org.fhtech.yamaServer.services.MovieService;
 import org.fhtech.yamaServer.utility.MovieConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+
+import java.util.stream.Collectors;
 
 @Endpoint
 public class MovieEndpoint {
@@ -34,10 +37,8 @@ public class MovieEndpoint {
     @ResponsePayload
     public ImportMovieResponse importMovies(@RequestPayload ImportMovieRequest request) {
         ImportMovieResponse response = new ImportMovieResponse();
-        request.getMovies().forEach(xmlMovie -> {
-            var domainMovie = MovieConverter.convertToDomainMovie(xmlMovie);
-            movieService.importMovie(domainMovie);
-        });
+        var domainMovies = request.getMovies().stream().map(MovieConverter::convertToDomainMovie).collect(Collectors.toList());
+        movieService.importMovies(domainMovies);
         return response;
     }
 

@@ -7,10 +7,13 @@ import org.fhtech.yamaServer.repositories.StudioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Component
 public class MovieService {
@@ -76,30 +79,39 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
+//    @Transactional (not necessary only one statement)
     public void importMovies(List<Movie> movies) {
-        movies.forEach(this::importMovie);
+        var domainMovies = movies
+                .stream()
+                .map(this::checkMovie)
+                .collect(Collectors.toList());
+        movieRepository.saveAll(domainMovies);
     }
 
-    public void importMovie(Movie movie) {
+    public Movie checkMovie(Movie movie) {
         var studio = movie.getStudio();
-        var studios = (List<Studio>) studioRepository.findAllByNameAndCountryCodeAndPostCode(
+        var studios = studioRepository.findAllByNameAndCountryCodeAndPostCode(
                 studio.getName(),
                 studio.getCountryCode(),
                 studio.getPostCode());
         if (studios.size() < 1) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Studio not found");
         if (studios.size() > 1)
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Studio exists more than once!");
+        movie.setStudio(studios.get(0));
 
+        var as = new ArrayList<Actor>();
         movie.getActors().forEach(actor -> {
-            var actors = (List<Actor>) actorRepository.findAllByFirstNameAndLastNameAndBirthDay(
+            var actors = actorRepository.findAllByFirstNameAndLastNameAndBirthDay(
                     actor.getFirstName(),
                     actor.getLastName(),
                     actor.getBirthDay()
             );
             if (actors.size() < 1) throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Actor not found");
             if (actors.size() > 1) throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Actor exists more than once!");
+            as.add(actors.get(0));
         });
-        movieRepository.save(movie);
+        movie.setActors(as);
+        return movie;
     }
 
     public Iterable<Movie> findMoviesByTitleContains(String searchString) {
