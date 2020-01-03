@@ -1,20 +1,25 @@
 package org.fhtech.yamaServer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.trace.http.HttpTraceRepository;
+import org.springframework.boot.actuate.trace.http.InMemoryHttpTraceRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -22,16 +27,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.authorizeRequests()
-                .antMatchers("/swagger-ui.html")
+        httpSecurity
+                .httpBasic().and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers(HttpMethod.GET)
+                .access("hasAuthority('MSRead')")
+                .antMatchers(HttpMethod.POST)
+                .access("hasAuthority('MSWrite')")
+                .antMatchers(HttpMethod.DELETE)
+                .access("hasAuthority('MSWrite')")
+                .antMatchers(HttpMethod.PUT)
+                .access("hasAuthority('MSWrite')")
+                .antMatchers(HttpMethod.PATCH)
+                .access("hasAuthority('MSWrite')")
+                .antMatchers("/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**",
+                        "/",
+                        "/staticfiles/**",
+                        "/actuator/**")
                 .permitAll()
-                .anyRequest()
-                .authenticated()
+                .antMatchers("**/*.wsdl")
+                .permitAll()
                 .and()
-                .formLogin();
-
-        httpSecurity.csrf()
-                .ignoringAntMatchers("/swagger-ui.html");
+                .csrf().disable();
     }
 
     @Autowired
@@ -41,13 +64,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery(
                         "select username,password, enabled from user where username=?")
                 .authoritiesByUsernameQuery(
-                        "SELECT username, rolename FROM ((user JOIN user_role ur on user.id = ur.user_id) JOIN role on role_id = role.id) where username=?")
-        .getUserDetailsService();
+                        "SELECT username, rolename FROM ((user JOIN user_role ur on user.id = ur.user_id) JOIN role on role_id = role.id) where username=?");
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() throws NoSuchAlgorithmException {
-        return new SHA512PasswordEncoder();
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl r = new RoleHierarchyImpl();
+        r.setHierarchy("MSWrite > MSRead > MSOther");
+        return r;
+    }
+
+    @Bean
+    public HttpTraceRepository httpTraceRepository() {
+        return new InMemoryHttpTraceRepository();
     }
 
 

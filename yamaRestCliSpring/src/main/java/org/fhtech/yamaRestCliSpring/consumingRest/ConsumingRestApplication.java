@@ -11,7 +11,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.client.support.BasicAuthenticationInterceptor;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Base64;
 
 @SpringBootApplication
 public class ConsumingRestApplication {
@@ -78,14 +84,16 @@ public class ConsumingRestApplication {
     private static void createActor(String filePath) throws Exception {
         var newActor = Deserializer.convertJSONToNewActor(filePath);
         RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new BasicAuthenticationInterceptor("writer", "123"));
         var result = restTemplate.postForObject(ACTOR_ENDPOINT, newActor, Actor.class);
-        System.out.println();
+        System.out.println(result);
     }
 
     private static void createStudio(String filePath) throws Exception {
         var newStudio = Deserializer.convertJSONToNewStudio(filePath);
         RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new BasicAuthenticationInterceptor("writer", "123"));
         var result = restTemplate.postForObject(STUDIO_ENDPOINT, newStudio, Studio.class);
-        System.out.println();
+        System.out.println(result);
     }
 }

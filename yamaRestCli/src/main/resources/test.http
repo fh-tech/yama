@@ -1,0 +1,22 @@
+#write
+GET localhost:8080/actor
+Authorization: Basic d3JpdGVyOjEyMw==
+###
+
+#read
+GET localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+###
+
+#other
+GET localhost:8080/actor
+Authorization: Basic b3RoZXI6MTIz
+###
+
+GET localhost:8080/actor
+###
+
+#failing
+GET localhost:8080/actor
+Authorization: Basic d3JpdGVyOjEyMzQ=
+###

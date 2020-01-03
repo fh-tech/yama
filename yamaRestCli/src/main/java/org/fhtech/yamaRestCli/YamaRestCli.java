@@ -9,6 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Paths;
 import java.time.Duration;
+import java.util.Base64;
 
 public class YamaRestCli {
 
@@ -61,6 +62,7 @@ public class YamaRestCli {
                 .uri(URI.create(endpoint))
                 .timeout(Duration.ofMinutes(1))
                 .header("Content-Type", "application/json")
+                .header("Authorization", "Basic " + Base64.getEncoder().encodeToString("writer:123".getBytes()))
                 .POST(HttpRequest.BodyPublishers.ofFile(Paths.get(filePath)))
                 .build();
         HttpClient client = HttpClient.newHttpClient();

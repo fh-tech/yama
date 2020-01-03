@@ -1,8 +1,8 @@
 INSERT INTO user (username, password, enabled)
 VALUES
-('reader', SHA2('123', 512), true),
-('writer', SHA2('123', 512), true),
-('other', SHA2('123', 512), true);
+('reader', '$2y$12$uw.U7N/3d0o6s9czGFG9PuKSUBs4At/H05K3vUZaxMVHunxsPGTOK', true),
+('writer', '$2y$12$uw.U7N/3d0o6s9czGFG9PuKSUBs4At/H05K3vUZaxMVHunxsPGTOK', true),
+('other', '$2y$12$uw.U7N/3d0o6s9czGFG9PuKSUBs4At/H05K3vUZaxMVHunxsPGTOK', true);
 
 INSERT INTO role (rolename)
 VALUES

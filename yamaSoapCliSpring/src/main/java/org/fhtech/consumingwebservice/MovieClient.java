@@ -1,11 +1,13 @@
 package org.fhtech.consumingwebservice;
 
 
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.fhtech.consumingwebservice.wsdl.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
+import org.springframework.ws.transport.http.HttpComponentsMessageSender;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
@@ -39,8 +41,6 @@ public class MovieClient extends WebServiceGatewaySupport {
     }
 
     public ImportMovieResponse importMovies(String filePath) throws Exception {
-
-
         var jaxbContext = JAXBContext.newInstance(Movies.class);
         var unmarshaller = jaxbContext.createUnmarshaller();
         var source = new StreamSource(new File(filePath));
@@ -50,12 +50,14 @@ public class MovieClient extends WebServiceGatewaySupport {
         var movies = jaxElement.getValue();
         request.getMovies().addAll(jaxElement.getValue().getMovie());
 
-        return (ImportMovieResponse) getWebServiceTemplate()
+        var messageSender = new HttpComponentsMessageSender();
+//        messageSender.setCredentials(new UsernamePasswordCredentials("writer", "123"));
+        var template = getWebServiceTemplate();
+//        template.setMessageSender(messageSender);
+//
+        return (ImportMovieResponse) template
                 .marshalSendAndReceive("http://localhost:8080/ws/movies", request,
                         new SoapActionCallback(
                                 "http://localhost:8080/ws/movies/importMovieRequest"));
     }
-
-
-
 }

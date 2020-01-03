@@ -42,11 +42,13 @@ function buildStudioElement(studio) {
 }
 
 function fetchStudios() {
-    let headers = new Headers();
-    headers.set("Authorization", "Basic " + base64.encode("MSRead:123"));
-    return fetch(`studio`, {
-        headers: headers
-    });
+    let options = {
+        headers: {
+            "Accept": "application/json",
+            "Authorization": "Basic " + btoa("reader:123")
+        }
+    };
+    return fetch(`studio`, options);
 }
 
 function removeAllChildren(elementID) {

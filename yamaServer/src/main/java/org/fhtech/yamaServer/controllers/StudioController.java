@@ -5,6 +5,7 @@ import org.fhtech.yamaServer.domain.UpdateStudio;
 import org.fhtech.yamaServer.services.StudioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,6 +27,7 @@ public class StudioController {
 
     @GetMapping
     public Iterable<Studio> getStudios() {
+        var user = SecurityContextHolder.getContext().getAuthentication();
         return this.studioService.findAll();
     }
 
