@@ -4,9 +4,10 @@
 .settings/
 
 # Intellij
-.idea/
 *.iml
 *.iws
+.idea/workspace.xml
+tasks.xml
 
 # Mac
 .DS_Store

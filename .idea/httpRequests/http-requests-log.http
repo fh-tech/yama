@@ -1,0 +1,326 @@
+GET http://localhost:8080/actor
+Authorization: Basic d3JpdGVyOjEyMzQ=
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXIkfMTffIz
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXIkfMTIz
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic d3JpdGVyOjEyMw==
+
+<> 2020-01-03T094317.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T094151.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXI6MTIz
+
+<> 2020-01-03T094149.403.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T094147.403.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T094146.403.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T094144.403.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T094134.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXI6MTIz
+
+<> 2020-01-03T094128.403.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T094125.200.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T094105.200.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T094102.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T093906.200.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T093901.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXI6MTIz
+
+<> 2020-01-03T093857.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T093831.200.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T093450.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXI6MTIz
+
+<> 2020-01-03T093448.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T093445.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T093425.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T093355.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T093204.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXI6MTIz
+
+<> 2020-01-03T093202.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T093200.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T093126.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXI6MTIz
+
+<> 2020-01-03T093123.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T093120.403.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T093115.403.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T093102.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXI6MTIz
+
+<> 2020-01-03T092734.200.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T092705.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXI6MTIz
+
+<> 2020-01-03T092252.200.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T092249.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T092020.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXI6MTIz
+
+<> 2020-01-03T092018.200.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T092015.200.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T091851.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T091808.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXI6MTIz
+
+<> 2020-01-03T091805.200.json
+
+###
+
+GET http://localhost:8080/actor
+
+<> 2020-01-03T091802.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic b3RoZXI6MTIz
+
+<> 2020-01-03T091710.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: Basic cmVhZGVyOjEyMw==
+
+<> 2020-01-03T091707.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: b3RoZXI6MTIz
+
+<> 2020-01-03T091645.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: cmVhZGVyOjEyMw==
+
+<> 2020-01-03T091559.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: cmVhZGVyOjEyMw==
+
+<> 2020-01-03T091419.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: d3JpdGVyOjEyMw==
+
+<> 2020-01-03T091407.200.json
+
+###
+
+GET http://localhost:8080/actor
+Authorization: d3JpdGVyOjEyMw==
+
+<> 2020-01-03T091234.200.json
+
+###
+

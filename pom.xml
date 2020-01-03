@@ -21,7 +21,6 @@
     <modules>
         <module>yamaServer</module>
         <module>yamaRestCli</module>
-        <module>yamaSoapCli</module>
         <module>yamaSoapCliSpring</module>
         <module>yamaRestCliSpring</module>
     </modules>
