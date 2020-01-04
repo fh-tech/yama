@@ -17,8 +17,6 @@ public class YamaRestCli {
     private static final String STUDIO_ENDPOINT = "http://127.0.0.1:8080/api/studio";
     private static final String ACTOR_ENDPOINT = "http://127.0.0.1:8080/api/actor";
 
-
-    // TODO: was soll der input von RESTCli sein? ein json file?
     public static void main(String[] args) throws Exception {
         Options options = new Options();
         try {

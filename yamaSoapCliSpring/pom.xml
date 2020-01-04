@@ -85,7 +85,4 @@
             <!-- end::wsdl[] -->
         </plugins>
     </build>
-
 </project>
-
-        <!--TODO: implement according to: https://spring.io/guides/gs/consuming-web-service/-->
