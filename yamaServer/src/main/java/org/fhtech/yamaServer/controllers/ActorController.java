@@ -5,19 +5,14 @@ import org.fhtech.yamaServer.domain.NewActor;
 import org.fhtech.yamaServer.domain.UpdateActor;
 import org.fhtech.yamaServer.services.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.SecurityContextProvider;
-import org.springframework.context.annotation.Role;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("actor")
+@RequestMapping("api/actor")
 public class ActorController {
 
     private ActorService actorService;

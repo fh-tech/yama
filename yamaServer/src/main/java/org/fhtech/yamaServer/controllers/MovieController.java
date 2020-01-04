@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("movie")
+@RequestMapping("api/movie")
 public class MovieController {
 
     private MovieService movieService;

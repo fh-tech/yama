@@ -26,35 +26,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     DataSource datasource;
 
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-
         httpSecurity
                 .httpBasic().and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers(HttpMethod.GET)
-                .access("hasAuthority('MSRead')")
-                .antMatchers(HttpMethod.POST)
-                .access("hasAuthority('MSWrite')")
-                .antMatchers(HttpMethod.DELETE)
-                .access("hasAuthority('MSWrite')")
-                .antMatchers(HttpMethod.PUT)
-                .access("hasAuthority('MSWrite')")
-                .antMatchers(HttpMethod.PATCH)
-                .access("hasAuthority('MSWrite')")
-                .antMatchers("/v2/api-docs",
-                        "/configuration/ui",
-                        "/swagger-resources/**",
-                        "/configuration/security",
-                        "/swagger-ui.html",
-                        "/webjars/**",
-                        "/",
-                        "/staticfiles/**",
-                        "/actuator/**")
-                .permitAll()
-                .antMatchers("**/*.wsdl")
-                .permitAll()
+                    .antMatchers(HttpMethod.GET, "/api/**").hasAuthority("MSRead")
+                    .antMatchers(HttpMethod.PUT, "/api/**").hasAuthority("MSWrite")
+                    .antMatchers(HttpMethod.PATCH, "/api/**").hasAuthority("MSWrite")
+                    .antMatchers(HttpMethod.POST, "/api/**").hasAuthority("MSWrite")
+                    .antMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("MSWrite")
                 .and()
-                .csrf().disable();
+                .authorizeRequests()
+                    .antMatchers(HttpMethod.POST, "/ws/**").hasAuthority("MSWrite")
+                    .antMatchers(HttpMethod.POST, "/ws/movies/searchMovies").hasAuthority("MSRead")
+                .and()
+                .authorizeRequests().anyRequest().permitAll()
+                .and().csrf().disable();
+
     }
 
     @Autowired

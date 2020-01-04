@@ -23,8 +23,8 @@ import java.util.Base64;
 public class ConsumingRestApplication {
 
     private static final Logger log = LoggerFactory.getLogger(ConsumingRestApplication.class);
-    private static final String STUDIO_ENDPOINT = "http://127.0.0.1:8080/studio";
-    private static final String ACTOR_ENDPOINT = "http://127.0.0.1:8080/actor";
+    private static final String STUDIO_ENDPOINT = "http://127.0.0.1:8080/api/studio";
+    private static final String ACTOR_ENDPOINT = "http://127.0.0.1:8080/api/actor";
 
     public static void main(String[] args) {
         SpringApplication.run(ConsumingRestApplication.class, args);

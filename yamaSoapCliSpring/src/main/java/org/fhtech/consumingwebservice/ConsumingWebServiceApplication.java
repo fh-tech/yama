@@ -1,10 +1,13 @@
 package org.fhtech.consumingwebservice;
 
 import org.apache.commons.cli.*;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.ws.transport.http.HttpComponentsMessageSender;
 
 @SpringBootApplication
 public class ConsumingWebServiceApplication {
@@ -14,7 +17,7 @@ public class ConsumingWebServiceApplication {
     }
 
     @Bean
-    CommandLineRunner lookup(MovieClient movieClient) {
+    CommandLineRunner lookup(@Autowired MovieClient movieClient) {
         return args -> {
             Options options = new Options();
             try {
@@ -25,6 +28,8 @@ public class ConsumingWebServiceApplication {
 
                 var cmd = new DefaultParser().parse(options, args);
                 String inputFilePath = cmd.getOptionValue("f");
+                var sender = new HttpComponentsMessageSender();
+                sender.setCredentials(new UsernamePasswordCredentials("writer:123"));
                 if(movieClient.importMovies(inputFilePath).isResult()) {
                     System.out.println("Import was successful");
                 } else {

@@ -48,7 +48,7 @@ function fetchStudios() {
             "Authorization": "Basic " + btoa("reader:123")
         }
     };
-    return fetch(`studio`, options);
+    return fetch(`api/studio`, options);
 }
 
 function removeAllChildren(elementID) {
