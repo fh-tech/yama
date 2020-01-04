@@ -39,6 +39,7 @@ public class MovieEndpoint {
         ImportMovieResponse response = new ImportMovieResponse();
         var domainMovies = request.getMovies().stream().map(MovieConverter::convertToDomainMovie).collect(Collectors.toList());
         movieService.importMovies(domainMovies);
+        response.setResult(true);
         return response;
     }
 
